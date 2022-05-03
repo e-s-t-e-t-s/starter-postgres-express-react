@@ -20,6 +20,11 @@ module.exports = (app) => {
     { single: true }
   );
 
+  // Get summaries (list of post titles and their numbers)
+  module.getSummaries = async () => db.query(
+    'select p.title, count(p.title) from posts p group by title;'
+  );
+
   // Update
   module.update = async (id, row) => {
     if (!Number(id)) throw new Error('No id given');
