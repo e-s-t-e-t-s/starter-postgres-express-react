@@ -98,7 +98,9 @@
     "db:seed": "npm run db:migrate && node scripts/db-seed.js",
     "test:client": "node scripts/test.js --env=jsdom",
     "test:server": "node scripts/test.js --config=config/jest/server.json",
-    "update-version": "npm --no-git-tag-version version patch"
+    "update-version": "npm --no-git-tag-version version patch",
+    "docker:up": "docker compose up",
+    "docker:seed": "npm run docker:up && docker compose exec app npm run seed"
   },
   "husky": {
     "hooks": {

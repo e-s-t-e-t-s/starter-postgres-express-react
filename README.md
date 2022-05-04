@@ -49,6 +49,9 @@ Note that the pre-commit hook runs the build script which compiles FE and lints 
 * `$ npm run dev`: run the development version of the app
 * `$ npm run test:client`: run FE tests using Jest
 * `$ npm run test:server`: run BE tests using Jest
+* `$ npm run docker:up`: start the project in Docker containers 
+* `$ npm run docker:seed`: initialize seed data in the Docker database
+
 
 ### Secondary
 * `$ npm run client:dev`: run Webpack dev server for FE development
