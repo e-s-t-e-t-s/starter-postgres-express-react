@@ -1,4 +1,5 @@
-
+# selected an older NodeJS version as newer ones 
+# do not seem to be able to handle the outdated dependencies
 FROM node:14.19
 WORKDIR /server
 COPY ./package.json .
