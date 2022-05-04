@@ -5,6 +5,7 @@ const logger = require('morgan');
 const passport = require('passport');
 const DB = require('./db.js');
 const apiPosts = require('./routes/api/posts');
+const apiPostSummaries = require('./routes/api/post-summaries');
 const apiAuth = require('./routes/auth');
 
 module.exports = async () => {
@@ -37,6 +38,7 @@ module.exports = async () => {
   app.get('/', (req, res) => res.json({ status: 'ok' }));
   app.use('/auth', apiAuth(app));
   app.use('/api', apiPosts(app));
+  app.use('/api', apiPostSummaries(app));
 
   /*
   app.use('/', (req, res) => {

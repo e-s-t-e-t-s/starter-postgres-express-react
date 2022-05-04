@@ -25,12 +25,6 @@ module.exports = (app) => {
     res.json(data);
   });
 
-  // Get post summaries
-  router.get('/summaries', auth.authenticate, async (req, res) => {
-    const data = await posts.getSummaries();
-    res.json(data);
-  });
-
   // Update
   router.put('/:id(\\d+)', auth.authenticate, async (req, res) => {
     const data = await posts.update(req.params.id, _.pick(req.body, 'content', 'title'));
