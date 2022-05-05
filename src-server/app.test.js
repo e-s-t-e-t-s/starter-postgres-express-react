@@ -33,4 +33,17 @@ describe('Run basic server tests', () => {
     'should respond 401 to [GET api/post-summaries] when not logged in (unauthorized)',
     () => request(app).get('/api/post-summaries').expect(401)
   );
+
+  it(
+    'should respond with an JWT access token when logging in at [GET login/auth] ',
+    () => {
+      request(app)
+        .post('/auth/login')
+        .send({
+          email: 'user@test.com',
+          password: 'password'
+        })
+        .expect(200);
+    }
+  );
 });
