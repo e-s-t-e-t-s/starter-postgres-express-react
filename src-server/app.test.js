@@ -30,7 +30,7 @@ describe('Run basic server tests', () => {
   it('should respond 200 to the [GET /]', () => request(app).get('/').expect(200));
 
   it(
-    'should respond 401 to [GET api/post-summaries] when not logged in (unauthorized)', 
+    'should respond 401 to [GET api/post-summaries] when not logged in (unauthorized)',
     () => request(app).get('/api/post-summaries').expect(401)
   );
 });
