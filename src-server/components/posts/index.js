@@ -21,9 +21,12 @@ module.exports = (app) => {
   );
 
   // Get summaries (list of post titles and their numbers)
-  module.getSummaries = async () => db.query(
-    'select p.title, count(p.title) from posts p group by title;'
-  );
+  module.getSummaries = async () => {
+    const data = await db.query(
+      'select p.title, count(p.title) from posts p group by title;'
+    );
+    return data.map(((e) => ({ ...e, count: parseInt(e.count, 10) })));
+  };
 
   // Update
   module.update = async (id, row) => {
