@@ -7,6 +7,7 @@ const App = require('./app');
 
 describe('Run basic server tests', () => {
   let app = {};
+  let jwtToken;
 
   // Run migrations, clear DB, then seeding
   beforeAll(async () => {
@@ -58,6 +59,24 @@ describe('Run basic server tests', () => {
             },
             token: expect.any(String)
           });
+          jwtToken = res.body.token;
+          done();
+        });
+    }
+  );
+
+  it(
+    'should get post summaries from [GET /api/post-summaries] using the JWT token',
+    (done) => {
+      request(app)
+        .get('/api/post-summaries')
+        .set('Authorization', `Bearer ${jwtToken}`)
+        .expect(200)
+        .end((err, res) => {
+          res.body.forEach((e) => expect(e).toEqual({
+            title: expect.any(String),
+            count: expect.any(Number)
+          }));
           done();
         });
     }
