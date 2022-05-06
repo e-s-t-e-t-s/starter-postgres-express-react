@@ -27,23 +27,39 @@ describe('Run basic server tests', () => {
     return expect(typeof db).toBe('object');
   });
 
-  it('should respond 200 to the [GET /]', () => request(app).get('/').expect(200));
+  it(
+    'should respond 200 to the [GET /]',
+    (done) => request(app).get('/').expect(200, done)
+  );
 
   it(
     'should respond 401 to [GET api/post-summaries] when not logged in (unauthorized)',
-    () => request(app).get('/api/post-summaries').expect(401)
+    (done) => request(app).get('/api/post-summaries').expect(401, done)
   );
 
   it(
     'should respond with an JWT access token when logging in at [GET login/auth] ',
-    () => {
+    (done) => {
       request(app)
         .post('/auth/login')
         .send({
           email: 'user@test.com',
           password: 'password'
         })
-        .expect(200);
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body).toEqual({
+            user: {
+              id: expect.any(Number),
+              email: expect.any(String),
+              firstName: 'User',
+              lastName: 'Test',
+              createdAt: expect.any(String)
+            },
+            token: expect.any(String)
+          });
+          done();
+        });
     }
   );
 });
